@@ -8,6 +8,10 @@ package Modelo;
  * @author Brigitte Vanesa Chavez Riascos-2041700
  */
 public class modeloPaciente {
+
+    public static modeloPaciente get(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     private String id;
     private String nombre;
     private String apellidos;

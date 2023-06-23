@@ -4,6 +4,16 @@
  */
 package Vista;
 
+import Controlador.controladorPaciente;
+import Modelo.modeloPaciente;
+import java.awt.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import Controlador.controladorPaciente;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author invitado
@@ -31,21 +41,21 @@ public class paciente extends javax.swing.JFrame {
         lblIdentificacion = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblTelefono = new javax.swing.JLabel();
-        jtxtIdentificacion = new javax.swing.JTextField();
-        jtxtNombre = new javax.swing.JTextField();
-        jtxtTelefono = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         lblApellidos = new javax.swing.JLabel();
         lblDireccion = new javax.swing.JLabel();
-        jtxtApellidos = new javax.swing.JTextField();
-        jtxtDireccion = new javax.swing.JTextField();
-        buscar = new javax.swing.JButton();
+        txtApellidos = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
+        buscarPaciente = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnActualizar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btnAgregar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jlistAlergias = new javax.swing.JList<>();
+        listAlergias = new javax.swing.JList<>();
         boxAlergias = new javax.swing.JComboBox<>();
 
         jMenuItem1.setText("jMenuItem1");
@@ -60,9 +70,9 @@ public class paciente extends javax.swing.JFrame {
 
         lblTelefono.setText("Teléfono");
 
-        jtxtIdentificacion.addActionListener(new java.awt.event.ActionListener() {
+        txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtIdentificacionActionPerformed(evt);
+                txtIdActionPerformed(evt);
             }
         });
 
@@ -70,7 +80,12 @@ public class paciente extends javax.swing.JFrame {
 
         lblDireccion.setText("Dirección");
 
-        buscar.setText("Buscar");
+        buscarPaciente.setText("Buscar");
+        buscarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarPacienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -84,9 +99,9 @@ public class paciente extends javax.swing.JFrame {
                     .addComponent(lblNombre))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtxtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                    .addComponent(jtxtTelefono)
-                    .addComponent(jtxtIdentificacion))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                    .addComponent(txtTelefono)
+                    .addComponent(txtId))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(69, 69, 69)
@@ -95,11 +110,11 @@ public class paciente extends javax.swing.JFrame {
                             .addComponent(lblDireccion))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtxtApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                            .addComponent(jtxtDireccion)))
+                            .addComponent(txtApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                            .addComponent(txtDireccion)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buscar)))
+                        .addComponent(buscarPaciente)))
                 .addGap(77, 77, 77))
         );
         jPanel1Layout.setVerticalGroup(
@@ -110,28 +125,34 @@ public class paciente extends javax.swing.JFrame {
                         .addGap(17, 17, 17)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblIdentificacion)
-                            .addComponent(jtxtIdentificacion)
-                            .addComponent(buscar))
+                            .addComponent(txtId))
                         .addGap(72, 72, 72))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
+                        .addGap(21, 21, 21)
+                        .addComponent(buscarPaciente)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNombre)
                             .addComponent(lblApellidos)
-                            .addComponent(jtxtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtxtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTelefono)
                     .addComponent(lblDireccion)
-                    .addComponent(jtxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "--[Controles]--", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Liberation Sans", 1, 13), new java.awt.Color(0, 0, 255))); // NOI18N
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
 
@@ -166,7 +187,7 @@ public class paciente extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane1.setViewportView(jlistAlergias);
+        jScrollPane1.setViewportView(listAlergias);
 
         boxAlergias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -225,13 +246,66 @@ public class paciente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtxtIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtIdentificacionActionPerformed
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtIdentificacionActionPerformed
+    }//GEN-LAST:event_txtIdActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void buscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPacienteActionPerformed
+
+        String id = txtId.getText();
+        modeloPaciente paciente = modeloPaciente.getId(id);//
+        
+        if (paciente != null) {
+        //se rellenan los campos
+        txtNombre.setText(paciente.getNombre());
+        txtApellidos.setText(paciente.getApellidos());
+        txtDireccion.setText(paciente.getDir());
+        txtTelefono.setText(paciente.getTel());
+        
+        //Obtener las alergias de si coleccion
+        List<String> alergias = getAlergias();//DAO
+        
+        DefaultListModel<String> listAlergias = new  DefaultListModel<>();
+        for(String alergia : alergias) {
+            listAlergias.addElement(alergia);
+        }
+        alergias.setModel(listAlergias);
+        
+        }else {
+            
+            //si no se encuentra se muestra mensaje de error
+            JOptionPane.showMessageDialog(null, "Paciente no encontrado", "Anuncio", JOptionPane.ERROR_MESSAGE);
+        }
+
+      
+    }//GEN-LAST:event_buscarPacienteActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+        controladorPaciente controlador = new controladorPaciente();
+        String identificacion = txtId.getText();
+        String nombre = txtNombre.getText();
+        String telefono = txtTelefono.getText();
+        String direccion = txtDireccion.getText();
+        String apellidos = txtApellidos.getText();
+
+    Map<String, String> map = new HashMap<>();
+    map.put("identificacion", identificacion);
+    map.put("nombre", nombre);
+    map.put("telefono", telefono);
+    map.put("direccion", direccion);
+    map.put("apellidos", apellidos);
+
+    String rutaArchivo = "src/Archivos/archivo.txt";
+
+    controlador.guardarMapEnArchivo(map, rutaArchivo);
+
+    }
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,22 +347,22 @@ public class paciente extends javax.swing.JFrame {
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton buscar;
+    private javax.swing.JButton buscarPaciente;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> jlistAlergias;
-    private javax.swing.JTextField jtxtApellidos;
-    private javax.swing.JTextField jtxtDireccion;
-    private javax.swing.JTextField jtxtIdentificacion;
-    private javax.swing.JTextField jtxtNombre;
-    private javax.swing.JTextField jtxtTelefono;
     private javax.swing.JLabel lblApellidos;
     private javax.swing.JLabel lblDireccion;
     private javax.swing.JLabel lblIdentificacion;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTelefono;
+    private javax.swing.JList<String> listAlergias;
+    private javax.swing.JTextField txtApellidos;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,17 +19,7 @@ public class controladorPaciente {
     private Map<String, modeloPaciente> paciente = new HashMap<>();
     
     
-    //metodos
-    private void addButtonActionPerformed(ActionEvent e) {
-        Strig id = jtxtIdentificacion.getText();
-        
-        
-        if (pacientes.containsKey(id)) {
-            
-        }
-        
-
-    }
+    
     
 }
 
